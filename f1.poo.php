@@ -388,10 +388,11 @@ class Driver {
 }
 
 class FerrariF175 extends Car {
-    public function __construct(Engine $engine, Driver $driver)
+    public function __construct(Engine $engine, Driver $driver, Ecurie $ecurie)
     {
-        parent::__construct('Ferrari', $engine, 0.7, 330);
+        parent::__construct('Ferrari', $engine, $ecurie, 0.7, 330);
         $this->setDriver($driver);
+        $this->setEcurie($ecurie);
     }
 }
 
@@ -412,17 +413,21 @@ class Ecurie {
     }
 }
 
-$leclerc = new Driver('Charles Leclerc');
-$sainz = new Driver('Carlos Sainz');
+$ferarriEcurie = new Ecurie('Ferarri');
+$leclerc = new Driver('Charles Leclerc', $ferarriEcurie);
+$leclerc->setEcurie($ferarriEcurie);
+$sainz = new Driver('Carlos Sainz', $ferarriEcurie);
+$sainz->setEcurie($ferarriEcurie);
 
 $ferrariPowerUnit = new Engine(6, 500, 0.6, 'Ferrari', '2022');
 
 
-$ferarri = new FerrariF175($ferrariPowerUnit, $leclerc);
-$ferarri->setDriver($leclerc)->setTyres(new Tyre(Tyre::TYPE_SOFT));
+$ferarri = new FerrariF175($ferrariPowerUnit, $leclerc, $ferarriEcurie);
+$ferarri->setDriver($leclerc)->setTyres(new Tyre(Tyre::TYPE_SOFT))->setEcurie($ferarriEcurie);
 $ferarri->addLap();
 
-$ferarri2 = new FerrariF175($ferrariPowerUnit, $sainz);
-$ferarri2->setDriver($sainz)->setTyres(new Tyre(Tyre::TYPE_SOFT));
+$ferarri2 = new FerrariF175($ferrariPowerUnit, $sainz, $ferarriEcurie);
+$ferarri2->setDriver($sainz)->setTyres(new Tyre(Tyre::TYPE_SOFT))->setEcurie($ferarriEcurie);
 
 var_dump($ferarri, '___________', $ferarri2);
+//test
