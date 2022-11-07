@@ -14,7 +14,13 @@
 // - shield (Shield) : equipped item
 // - bag (Bag)
 
-class Personnage {
+abstract class Personnage {
+    protected int $phyPower; // (nul)0 >>> 100(efficace)
+    protected int $magPower; // (nul)0 >>> 100(efficace)
+    protected int $armor; // (nul)0 >>> 100(efficace)
+    protected int $escape; // chance to escape : (nul)0 >>> 100(efficace)
+    protected int $life; // (nul)0 >>> 100(full)
+    protected int $mana; // (nul)0 >>> 100(full)
     protected string $nom = 'Player';
     protected DateTime $dateDeCreation;
 
@@ -22,74 +28,14 @@ class Personnage {
         string $nom,
     )
     {
+        $this->setPhyPower = 50;
+        $this->setMagPower = 50;
+        $this->setArmor = 50;
+        $this->setEscape = 50;
+        $this->setLife = 100;
+        $this->setMana = 100;
         $this->nom = $nom;
         $this->dateDeCreation = new DateTime();
-    }
-
-    /**
-     * @param string $nom
-     */
-    public function setNom(string $nom): Personnage
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNom(): string
-    {
-        return $this->nom;
-    }
-
-    /**
-     * @param DateTime $dateDeCreation
-     */
-    public function setDateDeCreation(DateTime $dateDeCreation): Personnage
-    {
-        $this->dateDeCreation = $dateDeCreation;
-
-        return $this;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getDateDeCreation(): string
-    {
-        return $this->dateDeCreation;
-    }
-}
-
-class Guerrier extends Personnage {
-    protected int $phyPower; // (nul)0 >>> 100(efficace)
-    protected int $magPower; // (nul)0 >>> 100(efficace)
-    protected int $armor; // (nul)0 >>> 100(efficace)
-    protected int $escape; // chance to escape : (nul)0 >>> 100(efficace)
-    protected int $life; // (nul)0 >>> 100(full)
-    protected int $mana; // (nul)0 >>> 100(full)
-    protected string $classe;
-
-    public function __construct(
-        int    $phyPower = 80,
-        int    $magPower = 20,
-        int    $armor = 80,
-        int    $escape = 20,
-        int    $life = 100,
-        int    $mana = 100,
-        string $classe = 'Guerrier',
-    )
-    {
-        parent::__construct('Player');
-        $this->phyPower = $phyPower;
-        $this->magPower = $magPower;
-        $this->armor = $armor;
-        $this->escape = $escape;
-        $this->life = $life;
-        $this->mana = $mana;
-        $this->classe = $classe;
     }
 
     /**
@@ -217,473 +163,113 @@ class Guerrier extends Personnage {
     {
         return $this->classe;
     }
+
+    /**
+     * @param string $nom
+     */
+    public function setNom(string $nom): Personnage
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNom(): string
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @param DateTime $dateDeCreation
+     */
+    public function setDateDeCreation(DateTime $dateDeCreation): Personnage
+    {
+        $this->dateDeCreation = $dateDeCreation;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDateDeCreation(): string
+    {
+        return $this->dateDeCreation;
+    }
 }
 
-class Mage extends Personnage {
-    protected int $phyPower; // (nul)0 >>> 100(efficace)
-    protected int $magPower; // (nul)0 >>> 100(efficace)
-    protected int $armor; // (nul)0 >>> 100(efficace)
-    protected int $escape; // chance to escape : (nul)0 >>> 100(efficace)
-    protected int $life; // (nul)0 >>> 100(full)
-    protected int $mana; // (nul)0 >>> 100(full)
+class Guerrier extends Personnage {
     protected string $classe;
 
     public function __construct(
-        int    $phyPower = 20,
-        int    $magPower = 80,
-        int    $armor = 40,
-        int    $escape = 60,
-        int    $life = 100,
-        int    $mana = 100,
+        string $classe = 'Guerrier',
+    )
+    {
+        parent::__construct('Player');
+        $this->setPhyPower = 80;
+        $this->setMagPower = 20;
+        $this->setArmor = 80;
+        $this->setEscape = 20;
+        $this->setLife = 100;
+        $this->setMana = 100;
+        $this->classe = $classe;
+    }
+}
+
+class Mage extends Personnage {
+    protected string $classe;
+
+    public function __construct(
         string $classe = 'Mage'
     )
     {
         parent::__construct('Player');
-        $this->phyPower = $phyPower;
-        $this->magPower = $magPower;
-        $this->armor = $armor;
-        $this->escape = $escape;
-        $this->life = $life;
-        $this->mana = $mana;
+        $this->setPhyPower = 20;
+        $this->setMagPower = 80;
+        $this->setArmor = 40;
+        $this->setEscape = 60;
+        $this->setLife = 100;
+        $this->setMana = 100;
         $this->classe = $classe;
-    }
-
-    /**
-     * @param int $phyPower
-     */
-    public function setPhyPower(int $phyPower): Mage
-    {
-        $this->phyPower = $phyPower;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPhyPower(): int
-    {
-        return $this->phyPower;
-    }
-
-    /**
-     * @param int $magPower
-     */
-    public function setMagPower(int $magPower): Mage
-    {
-        $this->magPower = $magPower;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMagPower(): int
-    {
-        return $this->magPower;
-    }
-
-    /**
-     * @param int $armor
-     */
-    public function setArmor(int $armor): Mage
-    {
-        $this->armor = $armor;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getArmor(): int
-    {
-        return $this->armor;
-    }
-
-    /**
-     * @param int $escape
-     */
-    public function setEscape(int $escape): Mage
-    {
-        $this->escape = $escape;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getEscape(): int
-    {
-        return $this->escape;
-    }
-
-    /**
-     * @param int $life
-     */
-    public function setLife(int $life): Mage
-    {
-        $this->life = $life;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLife(): int
-    {
-        return $this->life;
-    }
-
-    /**
-     * @param int $mana
-     */
-    public function setMana(int $mana): Mage
-    {
-        $this->mana = $mana;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMana(): int
-    {
-        return $this->mana;
-    }
-
-    /**
-     * @param string $classe
-     */
-    public function setClasse(string $classe): Mage
-    {
-        $this->classe = $classe;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getClasse(): string
-    {
-        return $this->classe;
     }
 }
 
 class Voleur extends Personnage {
-    protected int $phyPower; // (nul)0 >>> 100(efficace)
-    protected int $magPower; // (nul)0 >>> 100(efficace)
-    protected int $armor; // (nul)0 >>> 100(efficace)
-    protected int $escape; // chance to escape : (nul)0 >>> 100(efficace)
-    protected int $life; // (nul)0 >>> 100(full)
-    protected int $mana; // (nul)0 >>> 100(full)
     protected string $classe;
 
     public function __construct(
-        int    $phyPower = 60,
-        int    $magPower = 40,
-        int    $armor = 30,
-        int    $escape = 70,
-        int    $life = 100,
-        int    $mana = 100,
         string $classe = 'Voleur'
     )
     {
         parent::__construct('Player');
-        $this->phyPower = $phyPower;
-        $this->magPower = $magPower;
-        $this->armor = $armor;
-        $this->escape = $escape;
-        $this->life = $life;
-        $this->mana = $mana;
+        $this->setPhyPower = 60;
+        $this->setMagPower = 40;
+        $this->setArmor = 30;
+        $this->setEscape = 70;
+        $this->setLife = 100;
+        $this->setMana = 100;
         $this->classe = $classe;
-    }
-
-    /**
-     * @param int $phyPower
-     */
-    public function setPhyPower(int $phyPower): Voleur
-    {
-        $this->phyPower = $phyPower;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPhyPower(): int
-    {
-        return $this->phyPower;
-    }
-
-    /**
-     * @param int $magPower
-     */
-    public function setMagPower(int $magPower): Voleur
-    {
-        $this->magPower = $magPower;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMagPower(): int
-    {
-        return $this->magPower;
-    }
-
-    /**
-     * @param int $armor
-     */
-    public function setArmor(int $armor): Voleur
-    {
-        $this->armor = $armor;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getArmor(): int
-    {
-        return $this->armor;
-    }
-
-    /**
-     * @param int $escape
-     */
-    public function setEscape(int $escape): Voleur
-    {
-        $this->escape = $escape;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getEscape(): int
-    {
-        return $this->escape;
-    }
-
-    /**
-     * @param int $life
-     */
-    public function setLife(int $life): Voleur
-    {
-        $this->life = $life;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLife(): int
-    {
-        return $this->life;
-    }
-
-    /**
-     * @param int $mana
-     */
-    public function setMana(int $mana): Voleur
-    {
-        $this->mana = $mana;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMana(): int
-    {
-        return $this->mana;
-    }
-
-    /**
-     * @param string $classe
-     */
-    public function setClasse(string $classe): Voleur
-    {
-        $this->classe = $classe;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getClasse(): string
-    {
-        return $this->classe;
     }
 }
 
 class Archer extends Personnage {
-    protected int $phyPower; // (nul)0 >>> 100(efficace)
-    protected int $magPower; // (nul)0 >>> 100(efficace)
-    protected int $armor; // (nul)0 >>> 100(efficace)
-    protected int $escape; // chance to escape : (nul)0 >>> 100(efficace)
-    protected int $life; // (nul)0 >>> 100(full)
-    protected int $mana; // (nul)0 >>> 100(full)
     protected string $classe;
 
     public function __construct(
-        int    $phyPower = 60,
-        int    $magPower = 40,
-        int    $armor = 50,
-        int    $escape = 50,
-        int    $life = 100,
-        int    $mana = 100,
         string $classe = 'Archer'
     )
     {
         parent::__construct('Player');
-        $this->phyPower = $phyPower;
-        $this->magPower = $magPower;
-        $this->armor = $armor;
-        $this->escape = $escape;
-        $this->life = $life;
-        $this->mana = $mana;
+        $this->setPhyPower = 60;
+        $this->setMagPower = 40;
+        $this->setArmor = 50;
+        $this->setEscape = 50;
+        $this->setLife = 100;
+        $this->setMana = 100;
         $this->classe = $classe;
-    }
-
-    /**
-     * @param int $phyPower
-     */
-    public function setPhyPower(int $phyPower): Archer
-    {
-        $this->phyPower = $phyPower;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPhyPower(): int
-    {
-        return $this->phyPower;
-    }
-
-    /**
-     * @param int $magPower
-     */
-    public function setMagPower(int $magPower): Archer
-    {
-        $this->magPower = $magPower;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMagPower(): int
-    {
-        return $this->magPower;
-    }
-
-    /**
-     * @param int $armor
-     */
-    public function setArmor(int $armor): Archer
-    {
-        $this->armor = $armor;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getArmor(): int
-    {
-        return $this->armor;
-    }
-
-    /**
-     * @param int $escape
-     */
-    public function setEscape(int $escape): Archer
-    {
-        $this->escape = $escape;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getEscape(): int
-    {
-        return $this->escape;
-    }
-
-    /**
-     * @param int $life
-     */
-    public function setLife(int $life): Archer
-    {
-        $this->life = $life;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLife(): int
-    {
-        return $this->life;
-    }
-
-    /**
-     * @param int $mana
-     */
-    public function setMana(int $mana): Archer
-    {
-        $this->mana = $mana;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMana(): int
-    {
-        return $this->mana;
-    }
-
-    /**
-     * @param string $classe
-     */
-    public function setClasse(string $classe): Archer
-    {
-        $this->classe = $classe;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getClasse(): string
-    {
-        return $this->classe;
     }
 }
 
