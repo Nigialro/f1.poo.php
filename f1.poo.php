@@ -392,7 +392,6 @@ class FerrariF175 extends Car {
     {
         parent::__construct('Ferrari', $engine, $ecurie, 0.7, 330);
         $this->setDriver($driver);
-        $this->setEcurie($ecurie);
     }
 }
 
@@ -430,4 +429,3 @@ $ferarri2 = new FerrariF175($ferrariPowerUnit, $sainz, $ferarriEcurie);
 $ferarri2->setDriver($sainz)->setTyres(new Tyre(Tyre::TYPE_SOFT))->setEcurie($ferarriEcurie);
 
 var_dump($ferarri, '___________', $ferarri2);
-//test
